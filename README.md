@@ -1,5 +1,5 @@
 # json-immediate
-an immediate mode JSON parser. 
+an immediate mode JSON parser.
 
 ## build
 json-immediate doesn't rely on libc:

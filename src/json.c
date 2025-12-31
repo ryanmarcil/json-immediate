@@ -1,11 +1,11 @@
-/* Copyright 2025 Ryan S. Marcil 
- * 
+/* Copyright 2025 Ryan S. Marcil
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ enum json_bool json_character_is_whitespace(char ascii)
 		case '\n':
 		case '\r':
 		case '\t':
-			return TRUE;
+		return TRUE;
 		default:
 			return FALSE;
 	}
@@ -79,7 +79,7 @@ char * json_string(char *json_start, char *json_end)
 	}
 
 	json_start += 1;
-	
+
 	for( ; json_start < json_end; json_start++)
 	{
 		if(*json_start == '"')
@@ -95,7 +95,7 @@ char * json_string(char *json_start, char *json_end)
 			if(json_start >= json_end)
 			{
 				return NULL;
-			}	
+			}
 
 			switch(*json_start)
 			{
@@ -118,9 +118,9 @@ char * json_string(char *json_start, char *json_end)
 						{
 							return NULL;
 						}
-					}	
+					}
 
-					break;	
+					break;
 
 				default:
 					return NULL;
@@ -135,7 +135,7 @@ char * json_string(char *json_start, char *json_end)
 		}
 	}
 
-	return NULL;	
+	return NULL;
 }
 
 char * json_number(char *json_start, char *json_end)
@@ -149,7 +149,7 @@ char * json_number(char *json_start, char *json_end)
 	// if json_start is -, which is OPTIONAL, a digit MUST follow it immediately
 	// if json_start is 0, a number MUST NOT follow it immediately
 	// if json_start is a digit other than zero, it may be followed by any number of digits
-	
+
 	if(*json_start == '-')
 	{
 		json_start += 1;
@@ -167,7 +167,7 @@ char * json_number(char *json_start, char *json_end)
 		if(json_start >= json_end)
 		{
 			return json_start;
-		}	
+		}
 
 		if(json_character_is_digit(*json_start) == TRUE)
 		{
@@ -190,7 +190,7 @@ char * json_number(char *json_start, char *json_end)
 	// at this point a number may have an optional fractional part and/or an optional exponential part
 	// if json_start is '.', a digit MUST follow it immediately
 	// if json_start is 'E' or 'e', an optional sign (+ or -) AND a digit MUST follow it immediately
-	
+
 	if(*json_start == '.')
 	{
 		json_start += 1;
@@ -198,7 +198,7 @@ char * json_number(char *json_start, char *json_end)
 		if(json_start >= json_end || json_character_is_digit(*json_start) == FALSE)
 		{
 			return NULL;
-		}	
+		}
 
 		for( ; json_start < json_end; json_start++)
 		{
@@ -239,7 +239,7 @@ char * json_number(char *json_start, char *json_end)
 		}
 	}
 
-	return json_start;	
+	return json_start;
 }
 
 char * json_object_start(char *json_start, char *json_end)
@@ -254,7 +254,7 @@ char * json_object_start(char *json_start, char *json_end)
 		json_start += 1;
 		return json_start;
 	}
-	
+
 	return NULL;
 }
 
@@ -290,7 +290,7 @@ char * json_object_end(char *json_start, char *json_end)
 	{
 		json_start += 1;
 		return json_start;
-	}	
+	}
 
 	return NULL;
 }
@@ -335,13 +335,13 @@ char * json_true(char *json_start, char *json_end)
 	}
 
 	static char json_true[] = {'t', 'r', 'u', 'e'};
-	
+
 	for(int i = 0; i < sizeof(json_true) && json_start < json_end; i++, json_start++)
 	{
 		if(*json_start != json_true[i])
 		{
 			return NULL;
-		}	
+		}
 	}
 
 	return json_start;
@@ -355,7 +355,7 @@ char * json_false(char *json_start, char *json_end)
 	}
 
 	static char json_false[] = {'f', 'a', 'l', 's', 'e'};
-	
+
 	for(int i = 0; i < sizeof(json_false) && json_start < json_end; i++, json_start++)
 	{
 		if(*json_start != json_false[i])

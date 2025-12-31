@@ -1,11 +1,11 @@
-/* Copyright 2025 Ryan S. Marcil 
- * 
+/* Copyright 2025 Ryan S. Marcil
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,7 +51,7 @@ enum json_bool json_character_is_hex(char ascii);
 enum json_bool json_character_is_control(char ascii);
 
 /**
- * @brief Consume whitespace until the first non-whitespace character. 
+ * @brief Consume whitespace until the first non-whitespace character.
  * NULL may indicate invalid pointer arguments, or that the string is entirely whitespace.
  *
  * @param json_start parsing starts at this character
@@ -113,21 +113,21 @@ char * json_object_end(char *json_start, char *json_end);
 /**
  * @brief Consume an array start ('[').
  * NULL may indicate invalid pointer arguments, or that an array start wasn't the next token.
- * 
+ *
  * @param json_start parsing starts at this character
  * @param json_end parsing stops before this character
  * @return NULL if invalid, otherwise the first character after the array start
- */ 
+ */
 char * json_array_start(char *json_start, char *json_end);
 
 /**
  * @brief Consume an array end (']').
  * NULL may indicate invalid pointer arguments, or that an array end wasn't the next token.
- * 
+ *
  * @param json_start parsing starts at this character
  * @param json_end parsing stops before this character
  * @return NULL if invalid, otherwise the first character after the array end
- */ 
+ */
 char * json_array_end(char *json_start, char *json_end);
 
 /**
@@ -143,7 +143,7 @@ char * json_true(char *json_start, char *json_end);
 /**
  * @brief Consume a false literal.
  * NULL may indicate invalid pointer arguments, or that a false literal wasn't the next token.
- * 
+ *
  * @param json_start parsing starts at this character
  * @param json_end parsing stops before this character
  * @return NULL if invalid, otherwise the first character after the false literal
