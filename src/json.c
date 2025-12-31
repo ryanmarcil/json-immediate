@@ -145,6 +145,11 @@ char * json_number(char *json_start, char *json_end)
 		return NULL;
 	}
 
+	// the structure of this method is confusing because a number can start with -, 0, 1...9, -0, -1...-9
+	// if json_start is -, which is OPTIONAL, a digit MUST follow it immediately
+	// if json_start is 0, a number MUST NOT follow it immediately
+	// if json_start is a digit other than zero, it may be followed by any number of digits
+	
 	if(*json_start == '-')
 	{
 		json_start += 1;
@@ -182,6 +187,10 @@ char * json_number(char *json_start, char *json_end)
 		}
 	}
 
+	// at this point a number may have an optional fractional part and/or an optional exponential part
+	// if json_start is '.', a digit MUST follow it immediately
+	// if json_start is 'E' or 'e', an optional sign (+ or -) AND a digit MUST follow it immediately
+	
 	if(*json_start == '.')
 	{
 		json_start += 1;
@@ -218,6 +227,8 @@ char * json_number(char *json_start, char *json_end)
 		{
 			return NULL;
 		}
+
+		json_start += 1;
 
 		for( ; json_start < json_end; json_start++)
 		{
