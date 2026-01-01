@@ -387,7 +387,7 @@ char * json_null(char *json_start, char *json_end)
 	return json_start;
 }
 
-char * json_next(char *json_start, char *json_end)
+char * json_comma(char *json_start, char *json_end)
 {
 	if((json_start = json_whitespace(json_start, json_end)) == NULL)
 	{
@@ -398,8 +398,50 @@ char * json_next(char *json_start, char *json_end)
 	{
 		json_start += 1;
 		return json_start;
-	}
+	}	
 
 	return NULL;
+}	
+
+enum json_value json_next(char *json_start, char *json_end)
+{
+	if((json_start = json_whitespace(json_start, json_end)) == NULL)
+	{
+		return JSON_INVALID;
+	}
+
+	switch(*json_start)
+	{
+		case '"':
+			return JSON_STRING;
+		case '-':
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			return JSON_NUMBER;
+		case '{':
+			return JSON_OBJECT_START;
+		case '}':
+			return JSON_OBJECT_END;
+		case '[':
+			return JSON_ARRAY_START;
+		case ']':
+			return JSON_ARRAY_END;
+		case 't':
+			return JSON_TRUE;
+		case 'f':
+			return JSON_FALSE;
+		case 'n':
+			return JSON_NULL;
+		default:
+			return JSON_INVALID;
+	}	
 }
 

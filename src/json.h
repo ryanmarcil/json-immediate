@@ -23,6 +23,23 @@ enum json_bool
 };
 
 /**
+ *
+ */
+enum json_value
+{
+	JSON_STRING,
+	JSON_NUMBER,
+	JSON_OBJECT_START,
+	JSON_OBJECT_END,
+	JSON_ARRAY_START,
+	JSON_ARRAY_END,
+	JSON_TRUE,
+	JSON_FALSE,
+	JSON_NULL,
+	JSON_INVALID,
+};
+
+/**
  * @brief Check whether a character is a valid whitespace character.
  * @param ascii ascii character
  * @return TRUE if whitespace, otherwise FALSE
@@ -161,12 +178,21 @@ char * json_false(char *json_start, char *json_end);
 char * json_null(char *json_start, char *json_end);
 
 /**
- * @brief Consume a ','.
- * NULL may indicate invalid pointer arguments, or that a ',' wasn't the next token.
+ * @brief Consume a comma.
+ * NULL may indicate invalid pointer arguments, or that a comma wasn't the next token.
  *
  * @param json_start parsing starts at this character
  * @param json_end parsing stops before this character
- * @return NULL if invalid, otherwise the first character after the ','
+ * @return NULL if invalid, otherwise the first character after the comma
  */
-char * json_next(char *json_start, char *json_end);
+char * json_comma(char *json_start, char *json_end);
+
+/**
+ * @brief Return the next value type.
+ *
+ * @param json_start parsing starts at this character
+ * @param json_end parsing stops before this character
+ * @return JSON_INVALID if invalid, otherwise the next value type  
+ */
+enum json_value json_next(char *json_start, char *json_end);
 

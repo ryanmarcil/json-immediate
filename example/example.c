@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 	print(json_whitespace(value_start, value_end), value_end);
 	printf(", ");
 
-	key_start = json_next(value_end, json_end);
+	key_start = json_comma(value_end, json_end);
 	value_start = json_object_key(key_start, json_end);
 
 	printf("key: ");
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	print(value_start, value_end);
 	printf(", ");
 
-	key_start = json_next(value_end, json_end);
+	key_start = json_comma(value_end, json_end);
 	value_start = json_object_key(key_start, json_end);
 
 	printf("key: ");
@@ -89,14 +89,14 @@ int main(int argc, char *argv[])
 	print(array_start, value_end);
 	printf(", ");
 
-	array_start = json_next(value_end, json_end);
+	array_start = json_comma(value_end, json_end);
 	value_end = json_false(array_start, json_end);
 
 	printf("value: ");
 	print(array_start, value_end);
 	printf(", ");
 
-	array_start = json_next(value_end, json_end);
+	array_start = json_comma(value_end, json_end);
 	value_end = json_null(array_start, json_end);
 
 	printf("value: ");

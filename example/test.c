@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
 	char *json_start = "{\"a\": \"abc\", \"b\": 123.456e+789, \"c\": {\"d\": [true, false, null]}}";
 	char *json_end = json_start + strlen(json_start);
 
+	assert(json_next(json_start, json_end) == JSON_OBJECT_START);
+
 	char *key_start = json_object_start(json_start, json_end);
 	assert(key_start != NULL);
 	printf("{ ");
@@ -37,7 +39,7 @@ int main(int argc, char *argv[])
 	print(json_whitespace(value_start, value_end), value_end);
 	printf(", ");
 
-	key_start = json_next(value_end, json_end);
+	key_start = json_comma(value_end, json_end);
 	assert(key_start != NULL);
 
 	value_start = json_object_key(key_start, json_end);
@@ -52,7 +54,7 @@ int main(int argc, char *argv[])
 	print(json_whitespace(value_start, value_end), value_end);
 	printf(", ");
 
-	key_start = json_next(value_end, json_end);
+	key_start = json_comma(value_end, json_end);
 	assert(key_start != NULL);
 
 	value_start = json_object_key(key_start, json_end);
@@ -81,7 +83,7 @@ int main(int argc, char *argv[])
 	print(json_whitespace(array_start, value_end), value_end);
 	printf(", ");
 
-	array_start = json_next(value_end, json_end);
+	array_start = json_comma(value_end, json_end);
 	assert(array_start != NULL);
 
 	value_end = json_false(array_start, json_end);
@@ -90,7 +92,7 @@ int main(int argc, char *argv[])
 	print(json_whitespace(array_start, value_end), value_end);
 	printf(", ");
 
-	array_start = json_next(value_end, json_end);
+	array_start = json_comma(value_end, json_end);
 	assert(array_start != NULL);
 
 	value_end = json_null(array_start, json_end);
