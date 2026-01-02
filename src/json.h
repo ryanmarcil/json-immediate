@@ -13,6 +13,9 @@
  * limitations under the License.
  */
 
+#ifndef JSON_H
+#define JSON_H
+
 /**
  * @brief A simple boolean implementation.
  */
@@ -196,3 +199,4 @@ char * json_comma(char *json_start, char *json_end);
  */
 enum json_value json_next(char *json_start, char *json_end);
 
+#endif
